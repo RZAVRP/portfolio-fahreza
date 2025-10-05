@@ -3,82 +3,333 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>portfolio Fahreza</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Fahreza | TKJ & Web Developer (Beginner)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* --- Global --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    :root {
+      --bg-color: #080808;
+      --secondary-bg-color: #1a1a2e;
+      --main-color: #00ffff;
+      --text-color: #e5e5e5;
+      --gradient: linear-gradient(90deg, #00ffff, #007bff);
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    section {
+      max-width: 1100px;
+      margin: 6rem auto;
+      padding: 0 5%;
+      position: relative;
+      z-index: 2;
+    }
+    .heading {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .heading .accent { color: var(--main-color); text-shadow: 0 0 10px rgba(0,255,255,0.5); }
+
+    /* --- Navbar --- */
+    .header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 1.5rem 5%;
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,255,255,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .logo { font-size: 1.8rem; color: var(--text-color); font-weight: 700; text-decoration: none; }
+    .logo-dot { color: var(--main-color); }
+    .navbar a {
+      font-size: 1rem; color: var(--text-color); text-decoration: none; font-weight: 500;
+      margin-left: 2.5rem; transition: all 0.3s ease;
+      border-bottom: 2px solid transparent; padding-bottom: 5px;
+    }
+    .navbar a:hover, .navbar a.active { color: var(--main-color); border-color: var(--main-color); }
+    .navbar a i { margin-right: 5px; }
+
+    /* --- Hero --- */
+    .hero {
+      min-height: 100vh;
+      padding-top: 8rem;
+      display: flex; flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      text-align: center;
+    }
+    .hero-img img {
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      border: 5px solid var(--main-color);
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0,255,255,0.6);
+      filter: grayscale(0.2);
+      transition: all 0.5s ease;
+    }
+    .hero-img img:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 50px rgba(0,255,255,0.9); }
+    .hero-text { max-width: 550px; }
+    .hero-text .greeting { font-size: 1.1rem; color: var(--main-color); margin-bottom: 0.5rem; }
+    .hero-text .name-title { font-size: 4rem; font-weight: 900; line-height: 1.1; }
+    .hero-text .title-role {
+      font-size: 1.8rem; font-weight: 600; color: var(--main-color);
+      margin: 0.5rem 0 1.5rem;
+      white-space: nowrap; overflow: hidden;
+      border-right: .15em solid var(--main-color);
+      animation: typing 3s steps(30,end), blink-caret .8s step-end infinite;
+    }
+    .hero-text .description { font-size: 1rem; opacity: 0.9; margin-bottom: 2rem; }
+
+    /* --- Button --- */
+    .btn {
+      display: inline-block; padding: 14px 30px; background: var(--gradient);
+      color: #fff; font-size: 1rem; text-decoration: none; border: none;
+      border-radius: 8px; box-shadow: 0 5px 20px rgba(0,255,255,0.3);
+      text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+      transition: all 0.4s ease;
+    }
+    .btn:hover { background: linear-gradient(90deg,#007bff,#00ffff); transform: translateY(-5px) scale(1.02); box-shadow: 0 8px 25px rgba(0,255,255,0.5); }
+    .btn i { margin-right: 8px; }
+    .btn-secondary {
+      background: transparent; border: 2px solid var(--main-color); box-shadow: none;
+      color: var(--main-color); margin-top: 1rem;
+    }
+    .btn-secondary:hover { background: var(--main-color); color: var(--bg-color); box-shadow: 0 0 15px rgba(0,255,255,0.5); transform: translateY(-3px); }
+
+    /* --- About --- */
+    #about p { font-size: 1.1rem; max-width: 800px; margin: 0 auto 1.5rem; text-align: center; }
+
+    /* --- Skills --- */
+    .skills-container { display: flex; flex-direction: column; gap: 1.5rem; max-width: 700px; margin: 0 auto; padding: 1rem; background: var(--secondary-bg-color); border-radius: 15px; box-shadow: 0 0 20px rgba(0,255,255,0.1); }
+    .skill-item { margin-bottom: 0.5rem; }
+    .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; }
+    .bar { background: #333; border-radius: 5px; overflow: hidden; height: 15px; position: relative; }
+    .bar span {
+      display: block; height: 100%; background: var(--gradient);
+      border-radius: 5px; width: 0; transition: width 2s ease-out;
+    }
+
+    /* --- Projects --- */
+    .projects-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .card { background: var(--secondary-bg-color); padding: 1.5rem; border-radius: 15px; box-shadow: 0 0 15px rgba(0,255,255,0.1); transition: transform 0.4s ease, box-shadow 0.4s ease; border-top: 5px solid var(--main-color); }
+    .card h3 { color: var(--main-color); margin-bottom: 0.5rem; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,255,255,0.2); }
+    .project-link { display: inline-block; color: var(--main-color); text-decoration: none; margin-top: 1rem; font-weight: 600; transition: margin-left 0.3s ease; }
+    .project-link:hover { margin-left: 5px; }
+
+    /* --- Contact --- */
+    .contact-text { text-align: center; font-size: 1.1rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .social-link { color: var(--main-color); text-decoration: none; font-size: 1.1rem; transition: color 0.3s ease; }
+    .social-link i { margin-right: 8px; font-size: 1.2rem; }
+    .social-link:hover { color: #00b3b3; }
+
+    /* --- Footer --- */
+    footer { text-align: center; padding: 2rem 1rem; margin-top: 3rem; background: #000; color: #888; font-size: 0.9rem; border-top: 1px solid rgba(0,255,255,0.05); }
+    .scroll-up { color: #555; text-decoration: none; font-size: 0.9rem; margin-left: 1rem; transition: color 0.3s ease; }
+    .scroll-up:hover { color: var(--main-color); }
+
+    /* --- Floating Elements --- */
+    .floating-elements { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+    .floating-elements span { position: absolute; font-size: 7rem; font-weight: 700; color: rgba(0,255,255,0.03); animation: floatAnim 8s ease-in-out infinite alternate; user-select: none; }
+    .floating-elements span:nth-child(1){top:15%;left:10%;animation-delay:0s;}
+    .floating-elements span:nth-child(2){top:40%;left:70%;animation-delay:2s;color:rgba(255,165,0,0.05);}
+    .floating-elements span:nth-child(3){top:65%;left:25%;animation-delay:4s;color:rgba(0,128,255,0.05);}
+    .floating-elements span:nth-child(4){top:80%;left:85%;animation-delay:6s;color:rgba(255,255,0,0.05);}
+    @keyframes floatAnim { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-25px) rotate(10deg); } }
+
+    /* --- Welcome Screen --- */
+    .welcome-screen { position: fixed; inset: 0; background: var(--bg-color); display: flex; align-items: center; justify-content: center; z-index: 9999; color: var(--main-color); font-size: 2rem; text-align: center; transition: opacity 0.8s ease; }
+    #welcome-text { overflow: hidden; border-right: .15em solid var(--main-color); white-space: nowrap; animation: blink-caret .8s step-end infinite; }
+
+    /* --- Animations --- */
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--main-color) } }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; }
+    .fade-in.appear { opacity: 1; transform: translateY(0); }
+
+    /* --- Media Queries --- */
+    @media (max-width:900px){
+      .hero { flex-direction: column; text-align:center; padding:6rem 5% 4rem; }
+      .hero-text .name-title { font-size:3rem; }
+      .hero-text .title-role { font-size:1.5rem; margin-bottom:1rem; }
+      .hero-img { order:-1; }
+      .navbar { display:none; }
+      .header { justify-content:center; }
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Welcome Screen -->
+  <div id="welcome" class="welcome-screen"><h1 id="welcome-text"></h1></div>
+
+  <!-- Header -->
+<header class="header">
+  <a href="index.html" class="logo">Fahreza<span class="logo-dot">.</span></a>
+  <nav class="navbar">
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+    <a href="index jepang.html" class="active"><i class="fas fa-laptop-code"></i> learn Japanese</a>
+    <a href="index game.html" class="active"><i class="fas fa-laptop-code"></i> game</a>
+    <a href="foto filter.htmll" class="active"><i class="fas fa-laptop-code"></i> filter</a>
+  </nav>
+</header>
+
+
+  <!-- Floating Elements -->
   <div class="floating-elements">
     <span>&lt;/&gt;</span>
-    <span>HTML</span>
-    <span>CSS</span>
-    <span>JS</span>
+    <span>NET</span>
+    <span>SERV</span>
+    <span>DEV</span>
   </div>
 
-  <div id="welcome" class="welcome-screen">
-    <h1 id="welcome-text"></h1>
-  </div>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-img fade-in"><img src="me 2.jpg" alt="Foto Fahreza"></div>
+    <div class="hero-text fade-in">
+      <p class="greeting">Hello, Saya</p>
+      <h1 class="name-title">Fahreza</h1>
+      <h2 class="typewriter title-role">TKJ Student | Aspiring Web Developer</h2>
+      <p class="description">Saya sekarang kelas 11 jurusan <b>TKJ</b> di SMK 3 Perguruan Cikini. Saya masih pemula dan belajar dasar <i>networking</i>, setup server, dan web development.</p>
+      <a href="#about" class="btn"><i class="fas fa-address-card"></i> Kenali Saya</a>
+    </div>
+  </section>
 
-<section class="hero">
-  <div class="hero-img top">
-    <img src="me 2.jpg" alt="Foto Fahreza">
-  </div>
-  <div class="hero-text">
-    <h1 class="typewriter">Hi, saya <span>Fahreza</span></h1>
-    <p>Saya sekarang kelas 11 jurusan TKJ di SMK 3 Perguruan Cikini.  
-    Saya masih pemula dan lagi belajar hal-hal dasar tentang <em>networking</em>, setup server, dan web development.</p>
-    <a href="#about" class="btn">About me</a>
-  </div>
-</section>
-
-
+  <!-- About -->
   <section id="about" class="fade-in">
-    <h2>About me</h2>
-    <p>Nama saya <b>Fahreza</b>, kelas 11 jurusan TKJ di SMK 3 Perguruan Cikini. 
-       Saya lagi fokus belajar networking, setup server, sama web development.
-       Tujuan saya: jadi orang yang ahli di dunia IT dan bikin karya nyata lewat teknologi.</p>
+    <h2 class="heading">About <span class="accent">Me</span></h2>
+    <p>Nama saya <b>Fahreza</b>, kelas 11 jurusan TKJ. Fokus belajar <b>Networking (Cisco, Mikrotik)</b>, <b>Linux Server/Virtualisasi</b>, dan <b>Web Development</b>. Tujuan: jadi ahli IT dan bikin karya nyata.</p>
+    <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Hubungi Saya</a>
   </section>
 
+  <!-- Skills -->
   <section id="skills" class="fade-in">
-    <h2>Skill</h2>
-    <div class="skill">
-      <p>Networking (Cisco, Mikrotik)</p>
-      <div class="bar"><span style="width:85%"></span></div>
-    </div>
-    <div class="skill">
-      <p>Linux Server & Virtualisasi</p>
-      <div class="bar"><span style="width:70%"></span></div>
-    </div>
-    <div class="skill">
-      <p>HTML & CSS</p>
-      <div class="bar"><span style="width:80%"></span></div>
-    </div>
-    <div class="skill">
-      <p>JavaScript (Basic)</p>
-      <div class="bar"><span style="width:55%"></span></div>
-    </div>
-    <div class="skill">
-      <p>Hardware & Troubleshooting</p>
-      <div class="bar"><span style="width:75%"></span></div>
+    <h2 class="heading">My <span class="accent">Skills</span></h2>
+    <div class="skills-container">
+      <div class="skill-item">
+        <div class="skill-info"><p>Networking (Cisco, Mikrotik)</p><span>85%</span></div>
+        <div class="bar"><span data-level="85%"></span></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-info"><p>Linux Server & Virtualisasi</p><span>70%</span></div>
+        <div class="bar"><span data-level="70%"></span></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-info"><p>HTML & CSS</p><span>80%</span></div>
+        <div class="bar"><span data-level="80%"></span></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-info"><p>JavaScript (Basic)</p><span>55%</span></div>
+        <div class="bar"><span data-level="55%"></span></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-info"><p>Hardware & Troubleshooting</p><span>75%</span></div>
+        <div class="bar"><span data-level="75%"></span></div>
+      </div>
     </div>
   </section>
+
+  <!-- Projects -->
   <section id="projects" class="fade-in">
-    <h2>Projek</h2>
-    <div class="projects">
-      <div class="card">Konfigurasi Jaringan LAN & VLAN (Cisco Packet Tracer)</div>
-      <div class="card">Setup Server Debian dengan Client Windows</div>
-      <div class="card">Website Portofolio & Landing Page</div>
+    <h2 class="heading">My <span class="accent">Projects</span></h2>
+    <div class="projects-container">
+      <div class="card">
+        <h3>Konfigurasi Jaringan LAN & VLAN</h3>
+        <p>Simulasi jaringan kompleks menggunakan Cisco Packet Tracer (Subnetting, Routing, VLAN).</p>
+        <a href="#" class="project-link">Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+        <h3>Setup Server Debian</h3>
+        <p>Instalasi & konfigurasi server dasar (Web Server, DNS, DHCP) di lingkungan virtual.</p>
+        <a href="#" class="project-link">Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+        <h3>Website Portofolio & Landing Page</h3>
+        <p>Pengembangan website statis menggunakan HTML, CSS, dan JavaScript dasar.</p>
+        <a href="#" class="project-link">Details <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
   </section>
 
+  <!-- Contact -->
   <section id="contact" class="fade-in">
-    <h2>Kontak</h2>
-<p>Instagram: <a href="https://instagram.com/xrez.py" target="_blank">@xrez.py</a></p>
+    <h2 class="heading">Get In <span class="accent">Touch</span></h2>
+    <p class="contact-text">Tertarik berdiskusi tentang proyek atau peluang belajar? Hubungi saya!</p>
+    <div class="contact-links">
+      <a href="https://instagram.com/xrez.py" target="_blank" class="social-link"><i class="fab fa-instagram"></i>@xrez.py</a>
+      <a href="mailto:your.email@example.com" class="social-link"><i class="fas fa-envelope"></i>Email Me</a>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p> @fahreza </p>
+    <p>&copy; 2025 Fahreza. All Rights Reserved.</p>
+    <a href="#home" class="scroll-up"><i class="fas fa-arrow-up"></i> Back to Top</a>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Welcome Screen Typewriter
+      const welcomeTextEl = document.getElementById('welcome-text');
+      const welcomeScreen = document.getElementById('welcome');
+      const text = 'Selamat Datang.';
+      let i = 0;
+      function typeWriter() {
+        if(i < text.length) {
+          welcomeTextEl.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 120);
+        } else {
+          setTimeout(() => {
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => welcomeScreen.style.display = 'none', 800);
+          }, 1000);
+        }
+      }
+      typeWriter();
+
+      // Fade-in & Skill bar
+      const fadeElems = document.querySelectorAll('.fade-in');
+      const skillSpans = document.querySelectorAll('.bar span');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('appear');
+            if(entry.target.id === 'skills'){
+              skillSpans.forEach(span => span.style.width = span.dataset.level);
+            }
+          }
+        });
+      }, {threshold:0.2});
+      fadeElems.forEach(el => observer.observe(el));
+
+      // Navbar active link
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.navbar a');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(sec => { if(scrollY >= sec.offsetTop - 100) current = sec.id; });
+        navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href').includes(current)) link.classList.add('active'); });
+      });
+    });
+  </script>
 </body>
 </html>
